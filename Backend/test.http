@@ -1,0 +1,23 @@
+### Signup - Send OTP
+
+POST http://localhost:6000/api/v1/signup
+Content-Type: application/json
+
+{
+    "username": "nikhilsin",
+    "email": "nikhilsingh2764@gmail.com",
+    "password": "Pass123@AS"
+}
+
+###
+
+
+### Verify OTP
+
+POST http://localhost:6000/api/v1/verify-otp
+Content-Type: application/json
+
+{
+    "email": "nikhilsingh2764@gmail.com",
+    "otp": "481812"
+}

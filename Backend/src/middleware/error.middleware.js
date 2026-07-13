@@ -2,7 +2,7 @@ const errorMiddleware = (err,req,res,next) => {
 
    const statuscode= err.statuscode || 500;
 
-   res.status(statuscode).json({
+   return res.status(statuscode).json({
      success: false,
      statuscode: statuscode,
      message: err.message || 'something went wrong',
@@ -19,21 +19,50 @@ const errorMiddleware = (err,req,res,next) => {
 export default errorMiddleware;
 
 
+//ApiError        = only Creates the error not send to client
+//errorMiddleware = Sends the error response to client
+
+/*
+1. ApiError - only creates error obj and stores error data in it not send to client
+
+2. TryCatch - when TryCatch catches the error
+
+try {
+    ...
+} catch (error) {
+    next(error);
+}
+
+next(error) means: "Express, another middleware should handle this error."
+
+3. Express calls:  errorMiddleware(err, req, res, next)
+ 
+Now it converts the error into an HTTP response and send in to client. 
+
+and other imp thing is:
+
+we call ApiError is service and service not have direct access to res
+Service
+   ↓
+throw ApiError
+   ↓
+TryCatch
+   ↓
+next(error)
+   ↓
+Error Middleware
+   ↓
+res.status(...).json(...)
 
 
 
+and ApiRes call in controller and controller have direct acess to res
+Success Response
+        ↓
+Controller
+        ↓
+res.json()
 
 
+*/
 
-
-
-
-
-
-
-
-
-//"Why do we create error middleware for ApiError class, 
-// but we don't create res middleware for ApiResponse? class"
-//reason is: errors need a central place to be caught
-//responses are already controlled by the controller.

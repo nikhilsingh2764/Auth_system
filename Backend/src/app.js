@@ -3,12 +3,14 @@ import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-
+import userRouter from "./route/user.Router.js";
 
 const app = express();
 
 //app.use()   //express method used to register/add middleware runs for every incoming requests.
 //parse= read raw data, understand its format and convert into Javascript Object
+
+
 
 
 
@@ -45,6 +47,7 @@ app.use(morgan("dev"));
 
 
 
+app.use('/api/v1',userRouter);  //routes at last after all middleware because when request come first go to all middleware then come to routes
 
 
 

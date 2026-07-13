@@ -3,28 +3,47 @@ import mongoose from "mongoose";
 
 const authSchema = new mongoose.Schema({
 
-    Username: {
-        type: String,
-        required: true
-    },
-
-    Email: {
+    username: {
         type: String,
         required: true,
-        unique: true
+        minlength: 3,
+        maxlength: 30,
+        trim: true,
+        unique: true,
+
     },
 
-    Password: {
+    email: {
         type: String,
         required: true,
+        unique: true,
+        lowercase: true,
+        trim: true,
     },
+
+    password: {
+        type: String,
+        required: true,
+        minlength: 8,
+        select: false
+    },
+
+    isActive: {
+        type: Boolean,
+        default: false
+    },
+
+    isVerified: {
+        type: Boolean,
+        default: false
+    }
 
 }, { timestamps: true })
 
 
 
 
-const User= mongoose.model('User',authSchema);
+const User = mongoose.model('User', authSchema);
 
 export default User;
 
