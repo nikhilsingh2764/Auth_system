@@ -7,7 +7,10 @@ import { accessTokenOptions, refreshTokenOptions } from "../utils/cookieOptions.
 import ProfileService from "../service/profile.service.js";
 import updateProfileService from "../service/UpdateProfile.service.js";
 import updatePasswordService from "../service/ChangePassword.Service.js";
-
+import DeactivateAccountService from "../service/DeactivateAccount.service.js";
+import DeleteAccountService from "../service/deleteAccount.service.js";
+import ForgotPasswordService from "../service/ForgotPassword.service.js";
+import ResetPasswordService from "../service/resetPassword.service.js";
 
 
 export const Signup = TryCatch(async (req, res) => {
@@ -110,8 +113,95 @@ export const UpdateProfile = TryCatch(async (req, res) => {
 });
 
 
-export const UpdatePassword = TryCatch(async (req, res) =>{
+export const UpdatePassword = TryCatch(async (req, res) => {
+
+    const userId = req.user._id;
+
+    const result = await updatePasswordService(userId, req.body);
+
+
+    return res.status(200).json(
+        200,
+        "password changed successfully",
+        result
+    )
+
+
 
 });
 
 
+
+
+export const DeactivateAccount = TryCatch(async (req, res) => {
+
+    const userId = req.user._id;
+
+
+    await DeactivateAccountService(userId);
+
+    // Logout user
+    res.clearCookie("accessToken", accessTokenOptions);
+    res.clearCookie("refreshToken", refreshTokenOptions);
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            "Account deactivated successfully",
+            null
+        )
+    );
+
+});
+
+
+
+export const DeleteAccount = TryCatch(async (req, res) => {
+
+    const userId = req.user._id;
+    const { password } = req.body;
+
+    await DeleteAccountService(userId, password);
+
+    // Logout user
+    res.clearCookie("accessToken", accessTokenOptions);
+    res.clearCookie("refreshToken", refreshTokenOptions);
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            "Account deleted successfully",
+            null
+        )
+    );
+
+
+});
+
+
+export const ForgotPassword = TryCatch(async (req, res) => {
+
+    const { email } = req.body;
+
+    await ForgotPasswordService(email);
+
+    return res.status(200).json(
+        new ApiResponse(200, "Password reset OTP sent successfully", null)
+    );
+
+
+
+});
+
+
+export const ResetPassword = TryCatch(async (req, res) => {
+
+    const { email, otp, newPassword } = req.body;
+
+    await ResetPasswordService({email, otp, newPassword})
+
+    return res.status(200).json(
+        new ApiResponse(200,"Password reset successfully",null)
+    )
+
+});

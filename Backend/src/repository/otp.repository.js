@@ -10,7 +10,7 @@ class OTPRepository {
 
     // Find OTP using email during verification
     async findByEmail(email) {
-        return await OTP.findOne({email});
+        return await OTP.findOne({ email });
     }
 
     // Remove all old OTP before generating a new one
@@ -22,6 +22,23 @@ class OTPRepository {
         return await OTP.findByIdAndDelete(id);
 
     }
+
+
+    // Find by email + type
+    async findByEmailAndType(email, type) {
+        return await OTP.findOne({
+            email,
+            type
+        });
+    }
+    
+    // Delete by email + type
+    async deleteByEmailAndType(email, type) {
+    return await OTP.deleteMany({
+        email,
+        type
+    });
+}
 
 
 }

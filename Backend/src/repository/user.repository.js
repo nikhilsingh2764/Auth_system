@@ -17,6 +17,9 @@ class UserRepository {
         return await User.findOne({ email }).select("+password");
     }
 
+    async findByIdWithPassword(id) {
+        return await User.findById(id).select("+password");
+    }
 
     async findByUsername(username) {
         return await User.findOne({ username });
@@ -85,7 +88,10 @@ class UserRepository {
                 isActive: false //User account is deactivated. ❌
             },                  //if true account is activate.  ✅
             {
-                new: true //return updated document where isActive is false if return updated doc in normal isActive is true  
+                //return updated document where isActive is false if return updated doc in normal isActive is true  
+                returnDocument: "after",
+                runValidators: true
+
             }
         );
     }

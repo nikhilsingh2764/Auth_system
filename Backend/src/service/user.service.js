@@ -32,7 +32,7 @@ const SignupService = async (userdata) => {
     }
 
     //generate OPT and save opt with temporary signup data in db and send opt to client email
-    await sendOTPService({ username, email, password })
+    await sendOTPService({ username, email, password, type: "EMAIL_VERIFICATION" })
 
 
     //return response to controller

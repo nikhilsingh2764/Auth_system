@@ -3,25 +3,34 @@ import otpRepository from '../repository/otp.repository.js';
 import generateOTP from '../utils/generateOTP.js';
 import sendEmail from './email.service.js';
 import otpTemplate from '../templates/otp.template.js';
+import resetPasswordTemplate from "../templates/resetPassword.template.js";
+
 
 const SALT_ROUNDS = 10;
 
 
-const sendOTPService = async ({ username, email, password }) => {
+const sendOTPService = async ({ username=null, email, password=null, type }) => {
 
 
     //Hash password
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    let hashedPassword = null;
+
+    // Hash password only for signup
+    if (type === "EMAIL_VERIFICATION") {
+        hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    }
 
     //generate 6-digit OPT
     const otp = generateOTP();
     console.log(otp);
 
+    
     //OPT expires in 10 min
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     //remove all old opt from this email
-    await otpRepository.deleteByEmail(email);
+    await otpRepository.deleteByEmailAndType(email, type);
 
     // Save temporary signup data
     await otpRepository.create({
@@ -29,21 +38,36 @@ const sendOTPService = async ({ username, email, password }) => {
         email,
         password: hashedPassword,
         otp,
-        expiresAt
+        expiresAt,
+        type
     })
 
 
     //send to client email
 
-    //send email to client using email
-    await sendEmail({
-        to: email,
-        subject: "Verify Your Email",
-        html: otpTemplate(username, otp)
-    });
+    if (type === "EMAIL_VERIFICATION") {
+
+        await sendEmail({
+            to: email,
+            subject: "Verify Your Email",
+            html: otpTemplate(username, otp)
+        });
+
+    } else if (type === "PASSWORD_RESET") {
+
+        await sendEmail({
+            to: email,
+            subject: "Reset Your Password",
+            html: resetPasswordTemplate(otp)
+        });
+
+    }
 
 
-}
+
+    return null;
+
+};
 
 
 export default sendOTPService;

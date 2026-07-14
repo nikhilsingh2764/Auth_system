@@ -4,9 +4,9 @@ POST http://localhost:6000/api/v1/signup
 Content-Type: application/json
 
 {
-    "username": "nikhilsin",
+    "username": "nikhilchaughan",
     "email": "nikhilsingh2764@gmail.com",
-    "password": "Pass123@AS"
+    "password": "dhn245dfgAA@"
 }
 
 ###
@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "email": "nikhilsingh2764@gmail.com",
-    "otp": "963084"
+    "otp": "676951"
 }
 
 
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 {
     "email": "nikhilsingh2764@gmail.com",
-    "password": "Pass123@AS"
+    "password": "Password@123"
 }
 
 ###
@@ -38,8 +38,7 @@ Content-Type: application/json
 ### Get Profile 
 
 GET http://localhost:6000/api/v1/profile 
-Cookie: accessToken=    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYxZDJjMTM4NDk5ODlhYjEwN2MwMyIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyODQ3NSwiZXhwIjoxNzg0MDI5Mzc1fQ.7RvAzGsn2BeXzEXRF6Tdg98NIpLJ3rMtsTfm6NsC7vE
-
+Cookie: accessToken=    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTY0MDA1NjM2NzM2NmM4OTExODQyMCIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAzNzM4OCwiZXhwIjoxNzg0MDM4Mjg4fQ.jabUkBuMahF816FaJ8Z7g0bLgAbK89FhO_V45O8I1iU
 
 ###
 
@@ -64,4 +63,56 @@ Cookie: accessToken=  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYxZDJjM
 
 {
     "username": "vimal"
+}
+
+
+### Change Password
+
+PATCH http://localhost:6000/api/v1/change-password
+Content-Type: application/json
+Cookie: accessToken=   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYyOTI4ZTcyZmQxNDBmZjlkNzRjOCIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAzMTUzNSwiZXhwIjoxNzg0MDMyNDM1fQ.KxHrJNFxySqqJI1fdH87Lzry2LTXfV21ucmg2ano_OI
+
+{
+    "oldPassword": "Pass123@AS",
+    "newPassword": "dhn245dfgA@"
+}
+
+
+### Deactivate Account
+
+PATCH http://localhost:6000/api/v1/deactivate-account
+Cookie: accessToken=  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYzYzcyMzM0ZjY5ZjZlZDNjY2JjMCIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAzNjQ3NCwiZXhwIjoxNzg0MDM3Mzc0fQ.gx2XdHWX_211G50_1-TLvbqK_yUvyUDufCZkJQjhR6I
+
+
+### Delete Account
+
+DELETE http://localhost:6000/api/v1/delete-account
+Content-Type: application/json
+Cookie: accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTY0MDA1NjM2NzM2NmM4OTExODQyMCIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAzNzM4OCwiZXhwIjoxNzg0MDM4Mjg4fQ.jabUkBuMahF816FaJ8Z7g0bLgAbK89FhO_V45O8I1iU
+
+{
+    "password": "dhn245dfgA@"
+}
+
+
+
+### Forgot Password
+
+POST http://localhost:6000/api/v1/forgot-password
+Content-Type: application/json
+
+{
+    "email": "nikhilsingh2764@gmail.com"
+}
+
+
+### Reset Password
+
+POST http://localhost:6000/api/v1/reset-password
+Content-Type: application/json
+
+{
+    "email": "nikhilsingh2764@gmail.com",
+    "otp": "135487",
+    "newPassword": "Password@123"
 }
