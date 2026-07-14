@@ -55,5 +55,21 @@ export const verifyOtpValidator = [
 ]
 
 
+export const LoginValidator = [
 
+    body("email")
+        .trim()
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Invalid email format")  //isEmail check email format
+        .normalizeEmail(), // Convert email to standard format
+
+    
+    body("password")
+        .notEmpty()
+        .notEmpty().withMessage("Password is required")
+        .withMessage(
+            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
+        )
+
+]
 

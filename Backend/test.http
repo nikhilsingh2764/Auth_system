@@ -19,5 +19,39 @@ Content-Type: application/json
 
 {
     "email": "nikhilsingh2764@gmail.com",
-    "otp": "481812"
+    "otp": "159421"
 }
+
+
+### login test 
+
+POST http://localhost:6000/api/v1/Login
+Content-Type: application/json
+
+{
+    "email": "nikhilsingh2764@gmail.com",
+    "password": "Pass123@AS"
+}
+
+###
+
+### Get Profile 
+
+GET http://localhost:6000/api/v1/profile 
+Cookie: accessToken=   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTVlY2MwYWZkZjZjNzNkNTVlM2YxZSIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyMTE3OSwiZXhwIjoxNzg0MDIyMDc5fQ.g9Q5jWiLpkHdghOW8c5bUMVn4fDH70rhX3xTY98BnC4
+
+
+###
+
+### Refresh Access Token
+
+POST http://localhost:6000/api/v1/refresh-token
+Cookie: refreshToken =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTVlY2MwYWZkZjZjNzNkNTVlM2YxZSIsImlhdCI6MTc4NDAyMDM5OCwiZXhwIjoxNzg1MzE2Mzk4fQ.HnGvr4uZrJ15fzsdQhoRC2W96CHNOZY-C1QyzOhuvMc
+
+
+### 
+### Logout 
+POST http://localhost:6000/api/v1/logout 
+Cookie: accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTVlY2MwYWZkZjZjNzNkNTVlM2YxZSIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyMTE3OSwiZXhwIjoxNzg0MDIyMDc5fQ.g9Q5jWiLpkHdghOW8c5bUMVn4fDH70rhX3xTY98BnC4
+        
+

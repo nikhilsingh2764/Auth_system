@@ -19,7 +19,7 @@ const VerifyOTPService = async ({ email, otp }) => {
     //check opt expiry
     if (otpData.expiresAt < new Date()) {
 
-        await otpRepository.deleteById(_id);
+        await otpRepository.deleteById(otpData._id);
         throw new ApiError(400, "OTP has expired");
 
     }
@@ -33,7 +33,8 @@ const VerifyOTPService = async ({ email, otp }) => {
     const user = await userRepository.create({
         email: otpData.email,
         username: otpData.username,
-        password: otpData.password
+        password: otpData.password,
+        isVerified: true
     })
 
 
@@ -47,7 +48,7 @@ const VerifyOTPService = async ({ email, otp }) => {
         html: welcomeTemplate(user.username)
     });
 
-
+return user;
 
 };
 

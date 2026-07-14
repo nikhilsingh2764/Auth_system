@@ -14,7 +14,7 @@ class UserRepository {
     //find
 
     async findByEmail(email) {
-        return await User.findOne({email});
+        return await User.findOne({ email }).select("+password");
     }
 
 
@@ -41,6 +41,20 @@ class UserRepository {
         return await User.find();
     }
 
+
+    //VERIFY
+
+    async verifyEmail(id) {
+        return await User.findByIdAndUpdate(
+            id,
+            {
+                isVerified: true
+            },
+            {
+                new: true
+            }
+        );
+    }
 
 
     // EXISTS
@@ -93,17 +107,7 @@ class UserRepository {
     }
 
 
-    async verifyEmail(id) {
-        return await User.findByIdAndUpdate(
-            id,
-            {
-                isVerified: true
-            },
-            {
-                new: true
-            }
-        );
-    }
+
 
 
 
