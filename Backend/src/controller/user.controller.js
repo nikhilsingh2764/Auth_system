@@ -5,6 +5,8 @@ import VerifyOTPService from "../service/verifyOtp.service.js";
 import LoginService from "../service/login.service.js"
 import { accessTokenOptions, refreshTokenOptions } from "../utils/cookieOptions.js";
 import ProfileService from "../service/profile.service.js";
+import updateProfileService from "../service/UpdateProfile.service.js";
+import updatePasswordService from "../service/ChangePassword.Service.js";
 
 
 
@@ -91,3 +93,25 @@ export const Logout = TryCatch(async (req, res) => {
 
 
 });
+
+
+
+export const UpdateProfile = TryCatch(async (req, res) => {
+
+    const userId = req.user._id;
+
+    const user = await updateProfileService(userId, req.body)
+
+    return res.status(200).json(
+        new ApiResponse(200, "Profile updated successfully", user)
+    );
+
+
+});
+
+
+export const UpdatePassword = TryCatch(async (req, res) =>{
+
+});
+
+

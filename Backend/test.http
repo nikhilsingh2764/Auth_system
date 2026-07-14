@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "email": "nikhilsingh2764@gmail.com",
-    "otp": "159421"
+    "otp": "963084"
 }
 
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 ### Get Profile 
 
 GET http://localhost:6000/api/v1/profile 
-Cookie: accessToken=   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTVlY2MwYWZkZjZjNzNkNTVlM2YxZSIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyMTE3OSwiZXhwIjoxNzg0MDIyMDc5fQ.g9Q5jWiLpkHdghOW8c5bUMVn4fDH70rhX3xTY98BnC4
+Cookie: accessToken=    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYxZDJjMTM4NDk5ODlhYjEwN2MwMyIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyODQ3NSwiZXhwIjoxNzg0MDI5Mzc1fQ.7RvAzGsn2BeXzEXRF6Tdg98NIpLJ3rMtsTfm6NsC7vE
 
 
 ###
@@ -55,3 +55,13 @@ POST http://localhost:6000/api/v1/logout
 Cookie: accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTVlY2MwYWZkZjZjNzNkNTVlM2YxZSIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyMTE3OSwiZXhwIjoxNzg0MDIyMDc5fQ.g9Q5jWiLpkHdghOW8c5bUMVn4fDH70rhX3xTY98BnC4
         
 
+
+### Update Profile
+
+PATCH http://localhost:6000/api/v1/Update-Profile
+Content-Type: application/json
+Cookie: accessToken=  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYxZDJjMTM4NDk5ODlhYjEwN2MwMyIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDAyOTUyNCwiZXhwIjoxNzg0MDMwNDI0fQ.1u39NY5UwOi1t9_j8tZZM6hQ2l_bcHvBNzRXy5m3-Ms
+
+{
+    "username": "vimal"
+}
