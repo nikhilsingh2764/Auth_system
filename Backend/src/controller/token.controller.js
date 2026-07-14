@@ -1,31 +1,42 @@
 import TryCatch from "../middleware/TryCatch.js";
-import ApiResponse from "../utils/ApiResponse.js";
 import RefreshTokenService from "../service/refreshToken.service.js";
-import { accessTokenOptions } from "../utils/cookieOptions.js";
+import ApiResponse from "../utils/ApiResponse.js";
 
-export const RefreshToken = TryCatch(async (req, res) => {
 
-    // Get refresh token from cookie
-    const refreshToken = req.cookies.refreshToken;
+export const RefreshToken = TryCatch(async(req,res)=>{
 
-    // Generate new access token
-    const accessToken = await RefreshTokenService(refreshToken);
 
-    // store new access token in cookie
+    const refreshToken =
+    req.cookies.refreshToken;
+
+
+    const {
+        newAccessToken,
+        newRefreshToken
+    } = await RefreshTokenService(refreshToken);
+
+
+
     res.cookie(
         "accessToken",
-        accessToken,
-        accessTokenOptions
-    )
+        newAccessToken
+    );
 
 
-    // Send success response
+    res.cookie(
+        "refreshToken",
+        newRefreshToken
+    );
+
+
+
     return res.status(200).json(
-        new ApiResponse(200, "Access token refreshed successfully")
-    )
-
-
-
+        new ApiResponse(
+            200,
+            "Token refreshed successfully",
+            null
+        )
+    );
 
 
 });

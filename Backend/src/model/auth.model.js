@@ -36,6 +36,19 @@ const authSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+
+    // Account lock security
+
+    failedLoginAttempts: {
+        type: Number,
+        default: 0
+    },
+
+
+    lockUntil: {
+        type: Date,
+        default: null
     }
 
 }, { timestamps: true })

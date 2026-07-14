@@ -22,16 +22,17 @@ export const signupValidator = [
     body("password")
         .notEmpty()
         .withMessage("Password is required")
-        .isStrongPassword({
-            minLength: 8,
-            minLowercase: 1,
-            minUppercase: 1,
-            minNumbers: 1,
-            minSymbols: 1
-        })
-        .withMessage(
-            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
-        )
+        .isLength({ min: 8 })
+        .withMessage("Password must have minimum 8 characters")
+        .matches(/[A-Z]/)
+        .withMessage("Password must contain one uppercase letter")
+        .matches(/[a-z]/)
+        .withMessage("Password must contain one lowercase letter")
+        .matches(/[0-9]/)
+        .withMessage("Password must contain one number")
+        .matches(/[@$!%*?&]/)
+        .withMessage("Password must contain one special character")
+
 
 
 
@@ -66,10 +67,18 @@ export const LoginValidator = [
     
     body("password")
         .notEmpty()
-        .notEmpty().withMessage("Password is required")
-        .withMessage(
-            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
-        )
+        .withMessage("Password is required")
+        .isLength({ min: 8 })
+        .withMessage("Password must have minimum 8 characters")
+        .matches(/[A-Z]/)
+        .withMessage("Password must contain one uppercase letter")
+        .matches(/[a-z]/)
+        .withMessage("Password must contain one lowercase letter")
+        .matches(/[0-9]/)
+        .withMessage("Password must contain one number")
+        .matches(/[@$!%*?&]/)
+        .withMessage("Password must contain one special character")
+
 
 ]
 
