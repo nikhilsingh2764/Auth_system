@@ -2,6 +2,7 @@ import ApiError from "../utils/ApiError.js";
 import bcrypt from "bcrypt";
 import userRepository from "../repository/user.repository.js";
 import generateToken from "../utils/generateToken.js";
+import refreshTokenRepository from "../repository/refreshToken.repository.js";
 
 
 const LoginService = async (userdata) => {
@@ -184,6 +185,19 @@ const LoginService = async (userdata) => {
 
 console.log(accessToken)
 console.log("refreshToken :",refreshToken)
+
+await refreshTokenRepository.create({
+
+    userId: user._id,
+
+    token: refreshToken,
+
+    expiresAt: new Date(
+        Date.now() + 15 * 24 * 60 * 60 * 1000
+    )
+
+});
+
 
 
     return {

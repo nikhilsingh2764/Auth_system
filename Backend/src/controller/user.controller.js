@@ -11,7 +11,7 @@ import DeactivateAccountService from "../service/DeactivateAccount.service.js";
 import DeleteAccountService from "../service/deleteAccount.service.js";
 import ForgotPasswordService from "../service/ForgotPassword.service.js";
 import ResetPasswordService from "../service/resetPassword.service.js";
-
+import LogoutService from "../service/Logout.Service.js";
 
 export const Signup = TryCatch(async (req, res) => {
 
@@ -84,6 +84,13 @@ export const Profile = TryCatch(async (req, res) => {
 
 
 export const Logout = TryCatch(async (req, res) => {
+
+    // Get refresh token from cookie
+    const refreshToken = req.cookies.refreshToken;
+
+    // Remove refresh token from database
+    await LogoutService(refreshToken);
+
 
     //clear access and refresh token from cookies
     res.clearCookie("accessToken", accessTokenOptions);

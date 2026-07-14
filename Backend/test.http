@@ -4,8 +4,8 @@ POST http://localhost:6000/api/v1/signup
 Content-Type: application/json
 
 {
-    "username": "nikhilchaughan",
-    "email": "nikhilsingh2764@gmail.com",
+    "username": "nikhilcughan",
+    "email": "nikhilsinghdfg@gmail.com",
     "password": "dhn245dfgAA@"
 }
 
@@ -18,8 +18,8 @@ POST http://localhost:6000/api/v1/verify-otp
 Content-Type: application/json
 
 {
-    "email": "nikhilsingh2764@gmail.com",
-    "otp": "328232"
+    "email": "nikhilsinghdfg@gmail.com",
+    "otp": "905854"
 
 }
 
@@ -31,7 +31,7 @@ POST http://localhost:6000/api/v1/Login
 Content-Type: application/json
 
 {
-    "email": "nikhilsingh2764@gmail.com",
+    "email": "nikhilsinghdfg@gmail.com",
     "password": "dhn245dfgAA@"
 }
 
@@ -53,7 +53,7 @@ Cookie: refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTY1YmUy
 ### 
 ### Logout 
 POST http://localhost:6000/api/v1/logout 
-Cookie: accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTY1YmUyOGJmZDg2OTdkMGZlZjgwYiIsImVtYWlsIjoibmlraGlsc2luZ2gyNzY0QGdtYWlsLmNvbSIsImlhdCI6MTc4NDA0NDU0MSwiZXhwIjoxNzg0MDQ1NDQxfQ.JQqX9HXqIkJPLQPxKb81BNrRQxvtewE4PtcYIOh-URg
+Cookie: accessToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTY1ZmM5ZWI3ZjA1MDQxMzhkYjI5MSIsImVtYWlsIjoibmlraGlsc2luZ2hkZmdAZ21haWwuY29tIiwiaWF0IjoxNzg0MDQ1Nzc3LCJleHAiOjE3ODQwNDY2Nzd9.XBdYAQT7leSBMz9F8y3KnFdzvKP34TLcnhx_BP3-jFo
 
 
 
