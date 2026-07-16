@@ -1,36 +1,71 @@
-import clsx from "clsx";  //Combines CSS class names conditionally.
+import clsx from "clsx";
+import { LoaderCircle } from "lucide-react";
 
 function Button({
 
     children,  // Represents everything written between <Button>...</Button>.
 
-    type = "button",
+    type = "button",  //HTML button type. like button | submit | reset
 
-    onClick,
-
-    disabled = false, // Prevents user interaction.
- 
     loading = false,  // Prevents multiple API requests by disabling the button.
 
-    className,
+    disabled = false, // Prevents user interaction with the button.
+
+    className = "", //Allows additional Tailwind classes to be passed.
+
+    ...props //Forwards any additional HTML button attributes (id, aria-label, autoFocus, onClick, form, etc.).
+    
 
 }) {
 
     return (
 
         <button
-            type={type}
-            onClick={onClick}
-            disabled={disabled || loading}
+
+            {...props}
+
+            disabled={loading || props.disabled}
+
             className={clsx(
-                "w-full rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition",
+
+                "flex w-full items-center justify-center gap-2",
+
+                "rounded-lg",
+
+                "bg-blue-600",
+
+                "px-4 py-3",
+
+                "font-medium",
+
+                "text-white",
+
+                "transition-colors",
+
                 "hover:bg-blue-700",
+
                 "disabled:cursor-not-allowed",
+
                 "disabled:opacity-60",
+
                 className
+
             )}
+
         >
-            {  loading ? "Loading..." : children }
+
+            {loading && (
+
+                <LoaderCircle
+
+                    className="h-5 w-5 animate-spin"
+
+                />
+
+            )}
+
+            {loading ? "Loading..." : children}
+
         </button>
 
     );
