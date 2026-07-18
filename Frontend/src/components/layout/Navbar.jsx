@@ -2,10 +2,41 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
+import {logout} from "../../services/auth.service.js"
 
-import useAuthStore from "../../store/auth.store";
+import useAuthStore from "../../store/auth.store.js";
+
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 
 function Navbar() {
+
+    const navigate = useNavigate();
+    const logoutUser = useAuthStore((state) => state.logout);
+
+const handleLogout = async () => {
+
+    try {
+        const response = await logout();
+        logoutUser();
+        toast.success(response.message);
+        navigate("/login", { replace: true });
+
+    } catch (error) {
+toast.error(
+                error.response?.data?.message ||
+                "Logout failed"
+            );
+
+    }
+
+
+};
+
+
+
+
     const isAuthenticated = useAuthStore(
         (state) => state.isAuthenticated
     );
@@ -50,7 +81,7 @@ function Navbar() {
                                 Profile
                             </Link>
 
-                            <button
+                            <button onClick={handleLogout}
                                 className="rounded-lg bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
                             >
                                 Logout
@@ -81,8 +112,8 @@ function Navbar() {
                 <button
                     className="md:hidden"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >                                                    {/*md:hidden: Visible only on mobile. Hidden on medium screens and larger. */}                      
-                {isMenuOpen? <X size={28} />:<Menu size={28} />}    {/* A React component from the lucide-react library. It renders a hamburger (☰) SVG icon. */}
+                >                                                    {/*md:hidden: Visible only on mobile. Hidden on medium screens and larger. */}
+                    {isMenuOpen ? <X size={28} /> : <Menu size={28} />}    {/* A React component from the lucide-react library. It renders a hamburger (☰) SVG icon. */}
                 </button>
 
             </nav>
@@ -111,7 +142,7 @@ function Navbar() {
                                     Profile
                                 </Link>
 
-                                <button
+                                <button onClick={handleLogout}
                                     className="rounded-lg bg-red-500 px-4 py-2 text-white"
                                 >
                                     Logout

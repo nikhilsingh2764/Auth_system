@@ -1,9 +1,9 @@
 class ApiError extends Error{   //ApiError inherits all the properties and methods of JavaScript's built-in Error class.
 
-    constructor(statuscode,message='something went wrong',errors=[],){
+    constructor(statusCode,message='something went wrong',errors=[],){
      super(message) //Call the parent class (Error) constructor and pass the message to it.
      this.success=false;
-     this.statuscode=statuscode;
+     this.statusCode=statusCode;
      this.message=message;
      this.errors=errors;
      

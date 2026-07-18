@@ -6,22 +6,15 @@ import ApiResponse from "../utils/ApiResponse.js";
 export const RefreshToken = TryCatch(async(req,res)=>{
 
 
-    const refreshToken =
-    req.cookies.refreshToken;
+    const refreshToken = req.cookies.refreshToken;
 
-
-    const {
-        newAccessToken,
-        newRefreshToken
-    } = await RefreshTokenService(refreshToken);
-
+    const {  newAccessToken, newRefreshToken } = await RefreshTokenService(refreshToken);
 
 
     res.cookie(
         "accessToken",
         newAccessToken
     );
-
 
     res.cookie(
         "refreshToken",

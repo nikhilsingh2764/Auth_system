@@ -1,17 +1,13 @@
 import TryCatch from "../middleware/TryCatch.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import SignupService from "../service/user.service.js";
-import VerifyOTPService from "../service/verifyOtp.service.js";
-import LoginService from "../service/login.service.js"
 import { accessTokenOptions, refreshTokenOptions } from "../utils/cookieOptions.js";
-import ProfileService from "../service/profile.service.js";
-import updateProfileService from "../service/UpdateProfile.service.js";
-import updatePasswordService from "../service/ChangePassword.Service.js";
-import DeactivateAccountService from "../service/DeactivateAccount.service.js";
-import DeleteAccountService from "../service/deleteAccount.service.js";
-import ForgotPasswordService from "../service/ForgotPassword.service.js";
-import ResetPasswordService from "../service/resetPassword.service.js";
-import LogoutService from "../service/Logout.Service.js";
+
+
+import { SignupService, LoginService, ProfileService, LogoutService, VerifyOTPService, 
+UpdateProfileService, ForgotPasswordService, ResetPasswordService,
+updatePasswordService, DeactivateAccountService, DeleteAccountService } from "../service/auth.service.js";
+
+
 
 export const Signup = TryCatch(async (req, res) => {
 
@@ -110,7 +106,7 @@ export const UpdateProfile = TryCatch(async (req, res) => {
 
     const userId = req.user._id;
 
-    const user = await updateProfileService(userId, req.body)
+    const user = await UpdateProfileService(userId, req.body)
 
     return res.status(200).json(
         new ApiResponse(200, "Profile updated successfully", user)

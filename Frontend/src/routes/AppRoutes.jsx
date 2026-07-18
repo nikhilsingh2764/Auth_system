@@ -7,22 +7,23 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import VerifyOTP from "../pages/VerifyOTP";
 import ForgotPassword from "../pages/ForgotPassword";
-import ResetPassword from "../pages/ResetPassword";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
+import EditProfile from "../pages/EditProfile";
+import ChangePassword from "../pages/changePassword";
 
 function AppRoutes() {
     return (
-        <BrowserRouter>  
+        <BrowserRouter>
 
-            <Routes>  
+            <Routes>
 
                 {/* Layout Routes */}
                 <Route element={<Layout />}>
 
-                    <Route path="/" element={<Home />} /> 
+                    <Route path="/" element={<Home />} />
 
-                    <Route path="/login" element={<Login />} /> 
+                    <Route path="/login" element={<Login />} />
 
                     <Route path="/signup" element={<Signup />} />
 
@@ -30,9 +31,11 @@ function AppRoutes() {
 
                     <Route path="/forgot-password" element={<ForgotPassword />} />
 
-                    <Route path="/reset-password" element={<ResetPassword />} />
-
                     <Route path="/profile" element={<Profile />} />
+
+                    <Route path="/EditProfile" element={<EditProfile />} />
+
+                    <Route path="/change-password"  element={<ChangePassword />}/>
 
                 </Route>
 

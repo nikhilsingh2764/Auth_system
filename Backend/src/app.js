@@ -12,8 +12,9 @@ const app = express();
 //app.use()   //express method used to register/add middleware runs for every incoming requests.
 //parse= read raw data, understand its format and convert into Javascript Object
 
+console.log("APP LOADED");
 
-
+app.set("trust proxy", 1);
 
 // Security
 app.use(helmet());  //adds security-related HTTP headers to protect an Express application from common web attacks.

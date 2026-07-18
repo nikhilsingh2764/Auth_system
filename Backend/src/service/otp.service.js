@@ -4,7 +4,7 @@ import generateOTP from '../utils/generateOTP.js';
 import sendEmail from './email.service.js';
 import otpTemplate from '../templates/otp.template.js';
 import resetPasswordTemplate from "../templates/resetPassword.template.js";
-
+import UserRepository from '../repository/user.repository.js';
 
 const SALT_ROUNDS = 10;
 
@@ -23,7 +23,7 @@ const sendOTPService = async ({ username=null, email, password=null, type }) => 
 
     //generate 6-digit OPT
     const otp = generateOTP();
-    console.log(otp);
+    console.log("OTP IS:",otp);
 
     
     //OPT expires in 10 min
@@ -69,28 +69,7 @@ const sendOTPService = async ({ username=null, email, password=null, type }) => 
 
 };
 
-
 export default sendOTPService;
 
 //opt+data save in db and opt send to client email next is opt verify
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -19,6 +19,7 @@ const useAuthStore = create((set) => ({  //create: Creates a global Zustand stor
         }),
 
     // Clear user after logout
+    
     logout: () => // Clears the store after logout.
         set({
             user: null,

@@ -1,14 +1,19 @@
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
-import { useForm } from "react-hook-form"; //Main hook from React Hook Form. Manages form state, validation, submission and errors.
 import Card from "../components/common/Card";
+
+import { useForm } from "react-hook-form"; //Main hook from React Hook Form. Manages form state, validation, submission and errors.
 import { zodResolver } from "@hookform/resolvers/zod"; //Connects the Zod validation schema  with React Hook Form. Every submit is validated using signupSchema.
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 import { signupSchema } from "../validation/auth.schema"; //validation schema
 import { signup } from "../services/auth.service";
-import { toast } from "react-hot-toast";
 
 
 function Signup() {
+
+    const navigate = useNavigate();
 
     const {
 
@@ -40,18 +45,23 @@ function Signup() {
             toast.success(response.message)
             console.log(response);
 
+            sessionStorage.setItem("verifyEmail", response.data.email); //so if we refresh verify-otp page email state remains not vanish
+
+            navigate("/verify-otp");
+
+
         } catch (error) {
-            
+
             console.log("Full error:", error);
 
-        console.log("Backend error:", error.response?.data);
-        console.log(error.response?.data?.errors[0].msg)
+            console.log("Backend error:", error.response?.data);
+            console.log(error.response?.data?.errors?.[0]?.msg);
 
-        toast.error(
-            error.response?.data?.errors[0].msg || 
-            "Something went wrong"
-        );
-
+            toast.error(
+                error.response?.data?.message ||
+                error.response?.data?.errors?.[0]?.message ||
+                "Something went wrong"
+            );
         }
     };
 

@@ -4,33 +4,32 @@ import { signupValidator, verifyOtpValidator, LoginValidator } from '../validato
 import validate from '../middleware/validate.js';
 import authMiddleware from '../middleware/auth.middleware.js';
 
-
-
+import { apiLimiter, forgotPasswordLimiter, verifyOtpLimiter, signupLimiter, loginLimiter } from '../middleware/rateLimiter.middleware.js';
 
 const router = express.Router();
 
 
-router.post('/Signup', signupValidator, validate, Signup)
+router.post('/Signup', signupLimiter, signupValidator, validate, Signup)
 
-router.post('/verify-otp', verifyOtpValidator, validate, VerifyOTP)
+router.post('/verify-otp', verifyOtpLimiter, verifyOtpValidator, validate, VerifyOTP)
 
-router.post('/Login', LoginValidator, validate, Login)
+router.post('/Login', loginLimiter, LoginValidator, validate, Login)
 
-router.get('/Profile', authMiddleware, Profile)
+router.get('/Profile', apiLimiter, authMiddleware, Profile)
 
-router.post('/Logout', Logout)
+router.post('/Logout', authMiddleware, Logout)
 
-router.patch('/Update-Profile', authMiddleware, UpdateProfile)
+router.patch('/Update-Profile', apiLimiter, authMiddleware, UpdateProfile)
 
-router.patch('/change-password', authMiddleware, UpdatePassword)
+router.patch('/change-password', apiLimiter, authMiddleware, UpdatePassword)
 
-router.patch('/deactivate-account', authMiddleware, DeactivateAccount)
+router.patch('/deactivate-account', apiLimiter, authMiddleware, DeactivateAccount)
 
-router.delete('/delete-account', authMiddleware, DeleteAccount)
+router.delete('/delete-account', apiLimiter, authMiddleware, DeleteAccount)
 
-router.post("/forgot-password", ForgotPassword);
+router.post("/forgot-password", forgotPasswordLimiter, ForgotPassword);
 
-router.post("/reset-password", ResetPassword);
+router.post("/reset-password", verifyOtpLimiter, ResetPassword);
 
 
 export default router;
