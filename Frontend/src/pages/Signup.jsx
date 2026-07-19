@@ -53,7 +53,7 @@ function Signup() {
         } catch (error) {
 
             console.log("Full error:", error);
-
+            console.log(error.response);
             console.log("Backend error:", error.response?.data);
             console.log(error.response?.data?.errors?.[0]?.msg);
 

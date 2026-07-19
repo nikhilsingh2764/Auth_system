@@ -27,7 +27,7 @@ const sendOTPService = async ({ username=null, email, password=null, type }) => 
 
     
     //OPT expires in 10 min
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); //10 min
 
     //remove all old opt from this email
     await otpRepository.deleteByEmailAndType(email, type);

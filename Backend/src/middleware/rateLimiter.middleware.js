@@ -48,18 +48,18 @@ but in redis all server count is store in redis cache so every server get same c
 
 //code of redis rate limit ok
 
-import rateLimit from "express-rate-limit";
-import { RedisStore } from "rate-limit-redis";
+import rateLimit from "express-rate-limit"; //middleware limit API request
+import { RedisStore } from "rate-limit-redis"; //store rate limit data inside redis instead of node memory
 
-import redis from "../config/redis.js";
+import redis from "../config/redis.js"; //redis client connection
 
 
-// Common Redis Store
 
+// reusable Redis Store
 const createStore = (prefix) =>
     new RedisStore({
-        sendCommand: (...args) => redis.call(...args),
-        prefix,
+        sendCommand: (...args) => redis.call(...args), // express-rate-limit uses this function to communicate with Redis
+        prefix, //keeps different limiters like login signup separeated in redis
     });
 
 
@@ -74,17 +74,17 @@ export const loginLimiter = rateLimit({
 
     store: createStore("login:"), //store count in redis store/cache
 
-    windowMs: 1 * 60 * 1000,  //1 min
+    windowMs: 1 * 60 * 1000,  //1 min - Time window for counting requests
 
     max: 15,  //maximum 5 request send
 
 
-    standardHeaders: true,
+    standardHeaders: true, // Sends modern RateLimit headers - RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset
 
-    legacyHeaders: false,
+    legacyHeaders: false, //Disable old X-RateLimit-* headers
 
 
-    message: {
+    message: {   //Response returned when limit is exceeded
 
         success: false,
 
@@ -98,6 +98,11 @@ export const loginLimiter = rateLimit({
 
 
 
+
+
+
+
+
 // ==============================
 // Signup Limiter
 // 3 requests / 1 hour
@@ -107,7 +112,7 @@ export const loginLimiter = rateLimit({
 
 export const signupLimiter = rateLimit({
 
-    store: createStore("signup:"),
+    store: createStore("signup:"), //store req count in redis store
     windowMs: 60 * 60 * 1000, //1 hr 
     max: 30,
 

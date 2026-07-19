@@ -18,7 +18,6 @@ import resetPasswordTemplate from "../templates/resetPassword.template.js";
 
 
 
-
 const SALT_ROUNDS = 10;
 
 export const SignupService = async (userdata) => {
@@ -40,7 +39,7 @@ export const SignupService = async (userdata) => {
         throw new ApiError(409, "Email already exists");
     }
 
-    const usernameExist = await UserRepository.usernameExist(email);
+    const usernameExist = await UserRepository.usernameExist(username);
 
     if (usernameExist) {
         throw new ApiError(409, "Username already exists");
@@ -56,7 +55,6 @@ export const SignupService = async (userdata) => {
     }
 
 }
-
 
 
 export const VerifyOTPService = async ({ email, otp }) => {
@@ -325,31 +323,30 @@ await refreshTokenRepository.create({
 };
 
 
-
 export const ProfileService = async (userId) => {
 
     //find user using ID
-    const user = await UserRepository.findById(userId);
+        const user = await UserRepository.findById(userId);
 
-    if (!user) {
-        throw new ApiError(404, "user not exist")
-    }
+            if (!user) {
+                    throw new ApiError(404, "user not exist")
+                        }
 
-    //return profile data
-    return {
+                            //return profile data
+                                return {
 
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        isVerified: user.isVerified,
-        isActive: user.isActive,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
+                                        id: user._id,
+                                                username: user.username,
+                                                        email: user.email,
+                                                                isVerified: user.isVerified,
+                                                                        isActive: user.isActive,
+                                                                                createdAt: user.createdAt,
+                                                                                        updatedAt: user.updatedAt
 
-    }
+                                                                                            }
 
 
-};
+                                                                                            };
 
 
 
@@ -369,8 +366,6 @@ export const LogoutService = async (refreshToken) => {
     return null;
 
 };
-
-
 
 
 
@@ -421,7 +416,6 @@ export const UpdateProfileService = async (id, data) => {
     };
 
 };
-
 
 
 
@@ -623,3 +617,4 @@ export const DeleteAccountService = async (id, password) => {
 };
 
 
+//note pass {} when multiple parameters are there

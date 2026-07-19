@@ -22,7 +22,7 @@ export const Signup = TryCatch(async (req, res) => {
             )
         );
 
-})
+});
 
 
 export const VerifyOTP = TryCatch(async (req, res) => {
